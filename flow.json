@@ -84,7 +84,7 @@
         "info": ""
     },
     {
-        "id": "a8e4bf2f.90596",
+        "id": "5ebc853a.9cf32c",
         "type": "tab",
         "label": "Modbus",
         "disabled": false,
@@ -962,6 +962,31 @@
         "willTopic": "",
         "willQos": "0",
         "willPayload": ""
+    },
+    {
+        "id": "d508e07e.f4bc",
+        "type": "modbus-client",
+        "name": "LOCAL MODBUS SERVER",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "192.168.1.222",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true
     },
     {
         "id": "6f742d0.4b960d4",
@@ -4326,7 +4351,7 @@
         "id": "5907bb1d.2c38f4",
         "type": "inject",
         "z": "3662f577.cb66ca",
-        "name": "MoniconPLC-Server003V0.1.1",
+        "name": "MoniconPLC-Server003V0.1.2",
         "props": [
             {
                 "p": "payload"
@@ -4341,7 +4366,7 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "MoniconPLC-Server003V0.1.1",
+        "payload": "MoniconPLC-Server003V0.1.2",
         "payloadType": "str",
         "x": 170,
         "y": 80,
@@ -7431,5 +7456,323 @@
         "x": 940,
         "y": 160,
         "wires": []
+    },
+    {
+        "id": "eb1f7f5.670078",
+        "type": "modbus-server",
+        "z": "5ebc853a.9cf32c",
+        "name": "",
+        "logEnabled": false,
+        "hostname": "192.168.1.222",
+        "serverPort": "502",
+        "responseDelay": 100,
+        "delayUnit": "ms",
+        "coilsBufferSize": 10000,
+        "holdingBufferSize": 10000,
+        "inputBufferSize": 10000,
+        "discreteBufferSize": 10000,
+        "showErrors": false,
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2a96d8f6.0c6d98",
+        "type": "modbus-read",
+        "z": "5ebc853a.9cf32c",
+        "name": "SESS Modbus FC 3",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "5",
+        "rate": "10",
+        "rateUnit": "s",
+        "delayOnStart": true,
+        "startDelayTime": "10",
+        "server": "d508e07e.f4bc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "69cc7b0d.b66964"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "aa4cbb1d.2cbf48",
+        "type": "modbus-read",
+        "z": "5ebc853a.9cf32c",
+        "name": "SESS Modbus FC 1",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "unitid": "",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "15",
+        "rate": "10",
+        "rateUnit": "s",
+        "delayOnStart": true,
+        "startDelayTime": "10",
+        "server": "d508e07e.f4bc",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "9cf19b5f.71e3d8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "36f35b6d.1bfe24",
+        "type": "function",
+        "z": "5ebc853a.9cf32c",
+        "name": "FC 1 - Coil Registers",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nvar data = msg.payload.replace(/\\[/g, \"\").split(',')\n\n//Influx-DB - Local\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"MB_Coils\",\n        fields: {\n            cycleAbort: data[0] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleOn: data[1] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowSteamSupply: data[2] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowAirSupply: data[3] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            gasketLowPressure: data[4] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowWaterSupply: data[5] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowSteriTemp: data[6] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleOverTemp: data[7] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            powerInterrupt: data[8] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            generatorFault: data[9] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            doorFault: data[10] == \"true\" ? 1 : 0//.replace(/\\D/g,'')), //removes non numerical characters\n\n        },\n        tags:{\n            System: \"Modbus\",\n        }\n    }];\n    \n//Influx-V2 - Cloud\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"MB_Coils\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tcycleAbort: data[0] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleOn: data[1] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowSteamSupply: data[2] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowAirSupply: data[3] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                gasketLowPressure: data[4] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowWaterSupply: data[5] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowSteriTemp: data[6] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleOverTemp: data[7] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                powerInterrupt: data[8] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                generatorFault: data[9] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                doorFault: data[10] == \"true\" ? 1 : 0//.replace(/\\D/g,'')), //removes non numerical characters\n\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "5fb720b8.8492f"
+            ],
+            [
+                "6d897c89.12f574"
+            ]
+        ]
+    },
+    {
+        "id": "585b333.6eb46cc",
+        "type": "function",
+        "z": "5ebc853a.9cf32c",
+        "name": "FC 3 - Holding Registers",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nvar data = msg.payload.replace(/\\[/g, \"\").split(',')\n\n//Influx-DB - Local\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"MB_HoldingReg\",\n        fields: {\n            cycleWorkingTemp: parseFloat(data[0]),//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleWorkingPressure: parseFloat(data[1]),//.replace(/\\D/g,'')), //removes non numerical characters\n            chilledWaterFlow: parseFloat(data[2]),//.replace(/\\D/g,'')), //removes non numerical characters\n            chilledWaterTemp: parseFloat(data[3])//.replace(/\\D/g,'')), //removes non numerical characters\n\n        },\n        tags:{\n            System: \"Modbus\",\n        }\n    }];\n    \n//Influx-V2 - Cloud\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"MB_HoldingReg\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tcycleWorkingTemp: parseFloat(data[0]),//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleWorkingPressure: parseFloat(data[1]),//.replace(/\\D/g,'')), //removes non numerical characters\n                chilledWaterFlow: parseFloat(data[2]),//.replace(/\\D/g,'')), //removes non numerical characters\n                chilledWaterTemp: parseFloat(data[3])//.replace(/\\D/g,'')), //removes non numerical characters\n\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 610,
+        "y": 380,
+        "wires": [
+            [
+                "5fb720b8.8492f"
+            ],
+            [
+                "6d897c89.12f574"
+            ]
+        ]
+    },
+    {
+        "id": "9cf19b5f.71e3d8",
+        "type": "json",
+        "z": "5ebc853a.9cf32c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "36f35b6d.1bfe24"
+            ]
+        ]
+    },
+    {
+        "id": "69cc7b0d.b66964",
+        "type": "json",
+        "z": "5ebc853a.9cf32c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "585b333.6eb46cc"
+            ]
+        ]
+    },
+    {
+        "id": "6d897c89.12f574",
+        "type": "link out",
+        "z": "5ebc853a.9cf32c",
+        "name": "",
+        "links": [
+            "96dff132.a5bc8"
+        ],
+        "x": 1015,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5fb720b8.8492f",
+        "type": "link out",
+        "z": "5ebc853a.9cf32c",
+        "name": "",
+        "links": [
+            "99efd2a3.7113"
+        ],
+        "x": 1015,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6d3836be.9faed8",
+        "type": "comment",
+        "z": "5ebc853a.9cf32c",
+        "name": "Local MODBUS Server - eth0 - 192.168.1.222",
+        "info": "",
+        "x": 310,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f0c74b61.cef648",
+        "type": "exec",
+        "z": "21abc26.2e8053e",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 550,
+        "y": 880,
+        "wires": [
+            [
+                "ae366f5d.96cd8"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "948cb4a1.171708",
+        "type": "inject",
+        "z": "21abc26.2e8053e",
+        "name": "10 Mins",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 880,
+        "wires": [
+            [
+                "11fa8dc7.d7de02"
+            ]
+        ]
+    },
+    {
+        "id": "94185a69.81cd68",
+        "type": "function",
+        "z": "21abc26.2e8053e",
+        "name": "Remote Database",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\n\nstructureObject();\n\nreturn msg;\n        \nfunction structureObject() {\n\tmsg.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\t//Info: msg.topic,\n\t\t\t\tSystem: \"gsm_signal\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tgsm_signal: parseInt(msg.payload.replace(/\\s+/g, ' ').trim())\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 880,
+        "wires": [
+            [
+                "c120b570.f7e308"
+            ]
+        ]
+    },
+    {
+        "id": "ae366f5d.96cd8",
+        "type": "string",
+        "z": "21abc26.2e8053e",
+        "name": "",
+        "methods": [
+            {
+                "name": "getRightMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": ":"
+                    }
+                ]
+            },
+            {
+                "name": "getLeftMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": ","
+                    }
+                ]
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 750,
+        "y": 880,
+        "wires": [
+            [
+                "94185a69.81cd68"
+            ]
+        ]
+    },
+    {
+        "id": "11fa8dc7.d7de02",
+        "type": "function",
+        "z": "21abc26.2e8053e",
+        "name": "",
+        "func": "msg.payload = \"sudo python3 /home/pi/sixfab/Sixfab_RPi_CellularIoT_Library/sixfab.py\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 380,
+        "y": 880,
+        "wires": [
+            [
+                "f0c74b61.cef648"
+            ]
+        ]
     }
 ]
