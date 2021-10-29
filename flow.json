@@ -7778,5 +7778,15 @@
                 "f0c74b61.cef648"
             ]
         ]
+    },
+    {
+        "id": "b71e6016.9074",
+        "type": "comment",
+        "z": "5ebc853a.9cf32c",
+        "name": "MONITOR",
+        "info": "",
+        "x": 620,
+        "y": 40,
+        "wires": []
     }
 ]

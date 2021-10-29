@@ -1331,8 +1331,7 @@
                 "32f443b.2a004bc"
             ],
             [
-                "c379cf5.9ab6d3",
-                "e0642e7.10882d"
+                "c379cf5.9ab6d3"
             ]
         ]
     },
@@ -7779,21 +7778,5 @@
                 "f0c74b61.cef648"
             ]
         ]
-    },
-    {
-        "id": "e0642e7.10882d",
-        "type": "debug",
-        "z": "21abc26.2e8053e",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1200,
-        "y": 520,
-        "wires": []
     }
 ]
