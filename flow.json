@@ -99,8 +99,7 @@
         "database": "monicon_sess",
         "name": "",
         "usetls": false,
-        "tls": "",
-        "influxdbVersion": "1.x"
+        "tls": ""
     },
     {
         "id": "cb1b82bc.a26ae",
@@ -119,8 +118,7 @@
         "database": "monicon_sess",
         "name": "",
         "usetls": false,
-        "tls": "",
-        "influxdbVersion": "1.x"
+        "tls": ""
     },
     {
         "id": "da535876.280af8",
@@ -1211,6 +1209,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 570,
         "y": 120,
         "wires": [
@@ -1230,6 +1229,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 200,
         "wires": [
@@ -1280,6 +1280,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 280,
         "wires": [
@@ -1317,11 +1318,12 @@
         "type": "function",
         "z": "21abc26.2e8053e",
         "name": "Scale",
-        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet deploys = global.get(\"deploys\") || 0;\n\n    msg.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            Uptime: msg.payload,\n            Deploys: parseFloat(deploys)\n        },\n        tags:{\n            System: \"UPTIME\"\n        }\n    }];\n    \nvar msg1 = {};\n\nstructureObject();\n\nreturn [[msg], [msg1]];\n        \nfunction structureObject() {\n    let uptime = String(msg.payload[0].fields.Uptime);\n\tmsg1.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"UPTIME\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tUptime: uptime,\n\t\t\t\tDeploys: parseFloat(deploys)\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet deploys = global.get(\"deploys\") || 0;\n\n    msg.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            Uptime: msg.payload,\n            Deploys: parseFloat(deploys)\n        },\n        tags:{\n            System: \"UPTIME\"\n        }\n    }];\n    \nvar msg1 = {};\n\nstructureObject();\n\nreturn [[msg], [msg1]];\n        \nfunction structureObject() {\n    let uptime = String(msg.payload[0].fields.Uptime);\n\tmsg1.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"UPTIME\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tUptime:  \"\\\"\" + uptime + \"\\\"\",\n\t\t\t\tDeploys: parseFloat(deploys)\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 360,
         "wires": [
@@ -1364,6 +1366,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 120,
         "wires": [
@@ -1516,10 +1519,6 @@
         "measurement": "",
         "precision": "",
         "retentionPolicy": "",
-        "database": "",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
         "x": 990,
         "y": 300,
         "wires": []
@@ -1564,7 +1563,6 @@
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
-        "org": "",
         "x": 740,
         "y": 300,
         "wires": [
@@ -1827,6 +1825,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 520,
         "wires": [
@@ -1848,6 +1847,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 590,
         "y": 520,
         "wires": [
@@ -1967,6 +1967,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "5fca9504.17508c",
+        "nl": false,
+        "rap": false,
         "x": 190,
         "y": 80,
         "wires": [
@@ -2444,6 +2446,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 410,
         "y": 600,
         "wires": [
@@ -2478,11 +2481,12 @@
         "type": "function",
         "z": "21abc26.2e8053e",
         "name": "Used mem(SSD)",
-        "func": "if(msg.topic != \"Used mem(SSD)\") {\n    return\n}\n\nlet siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet data = msg.payload.split('/')\n\n//return msg;\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            SSD_Used: data[0],//.replace(/\\D/g,'')), //removes non numerical characters\n            SSD_Total: data[1],//.replace(/\\D/g,'')), //removes non numerical characters\n        },\n        tags:{\n            System: \"SSD\",\n        }\n    }];\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n    let usedMem = String(data[0].replace(/\\s+/g, ' ').trim());\n    let totMem = String(data[1].replace(/\\s+/g, ' ').trim());\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"SSD\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tSSD_Used: usedMem,\n\t\t\t\tSSD_Total: totMem,\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "func": "if(msg.topic != \"Used mem(SSD)\") {\n    return\n}\n\nlet siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet data = msg.payload.split('/')\n\n//return msg;\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            SSD_Used: data[0],//.replace(/\\D/g,'')), //removes non numerical characters\n            SSD_Total: data[1],//.replace(/\\D/g,'')), //removes non numerical characters\n        },\n        tags:{\n            System: \"SSD\",\n        }\n    }];\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n    let usedMem = String(data[0].replace(/\\s+/g, ' ').trim());\n    let totMem = String(data[1].replace(/\\s+/g, ' ').trim());\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"SSD\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tSSD_Used: \"\\\"\" + usedMem + \"\\\"\",\n\t\t\t\tSSD_Total: \"\\\"\" + totMem + \"\\\"\",\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 910,
         "y": 600,
         "wires": [
