@@ -132,22 +132,27 @@
         "id": "4d64fa3d.ad0334",
         "type": "mqtt-broker",
         "name": "",
-        "broker": "tailor.cloudmqtt.com",
-        "port": "10287",
+        "broker": "driver.cloudmqtt.com",
+        "port": "18748",
         "clientid": "",
         "usetls": false,
         "compatmode": false,
+        "protocolVersion": "4",
         "keepalive": "60",
         "cleansession": true,
         "birthTopic": "",
         "birthQos": "0",
         "birthPayload": "",
+        "birthMsg": {},
         "closeTopic": "",
         "closeQos": "0",
         "closePayload": "",
+        "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
-        "willPayload": ""
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
     },
     {
         "id": "7e73cdd4.e0b814",
@@ -170,19 +175,23 @@
         "port": "1883",
         "clientid": "",
         "usetls": false,
-        "compatmode": true,
+        "protocolVersion": "4",
         "keepalive": "60",
         "cleansession": true,
         "birthTopic": "",
         "birthQos": "0",
         "birthRetain": "false",
         "birthPayload": "",
+        "birthMsg": {},
         "closeTopic": "",
         "closePayload": "",
+        "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
         "willRetain": "false",
-        "willPayload": ""
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
     },
     {
         "id": "1e88062a.770d7a",
@@ -2659,6 +2668,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "4d64fa3d.ad0334",
+        "nl": false,
+        "rap": false,
         "x": 140,
         "y": 260,
         "wires": [
@@ -2715,6 +2726,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "5fca9504.17508c",
+        "nl": false,
+        "rap": false,
         "x": 150,
         "y": 80,
         "wires": [
@@ -7778,5 +7791,15 @@
                 "f0c74b61.cef648"
             ]
         ]
+    },
+    {
+        "id": "b71e6016.9074",
+        "type": "comment",
+        "z": "5ebc853a.9cf32c",
+        "name": "MONITOR",
+        "info": "",
+        "x": 620,
+        "y": 40,
+        "wires": []
     }
 ]
