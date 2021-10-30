@@ -935,19 +935,23 @@
         "port": "1883",
         "clientid": "",
         "usetls": false,
-        "compatmode": true,
+        "protocolVersion": "4",
         "keepalive": "60",
         "cleansession": true,
         "birthTopic": "",
         "birthQos": "0",
         "birthRetain": "false",
         "birthPayload": "",
+        "birthMsg": {},
         "closeTopic": "",
         "closePayload": "",
+        "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
         "willRetain": "false",
-        "willPayload": ""
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
     },
     {
         "id": "1da4179f.06e888",
@@ -1119,6 +1123,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "5fca9504.17508c",
+        "nl": false,
+        "rap": false,
         "x": 140,
         "y": 160,
         "wires": [
@@ -1349,8 +1355,7 @@
                 "8fd3e33c.936cf"
             ],
             [
-                "25bd3a1a.9c8846",
-                "b1de77a4.3be538"
+                "25bd3a1a.9c8846"
             ]
         ]
     },
@@ -8558,22 +8563,6 @@
         "statusType": "auto",
         "x": 760,
         "y": 660,
-        "wires": []
-    },
-    {
-        "id": "b1de77a4.3be538",
-        "type": "debug",
-        "z": "d5b77494.f7aea8",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1180,
-        "y": 480,
         "wires": []
     }
 ]
