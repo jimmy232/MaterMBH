@@ -1161,6 +1161,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 580,
         "y": 360,
         "wires": [
@@ -1340,6 +1341,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 360,
         "wires": [
@@ -1347,7 +1349,8 @@
                 "8fd3e33c.936cf"
             ],
             [
-                "25bd3a1a.9c8846"
+                "25bd3a1a.9c8846",
+                "b1de77a4.3be538"
             ]
         ]
     },
@@ -1838,6 +1841,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 870,
         "y": 520,
         "wires": [
@@ -2491,11 +2495,12 @@
         "type": "function",
         "z": "d5b77494.f7aea8",
         "name": "Used mem(SSD)",
-        "func": "if(msg.topic != \"Used mem(SSD)\") {\n    return\n}\n\nlet siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet data = msg.payload.split('/')\n\n//return msg;\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            SSD_Used: data[0],//.replace(/\\D/g,'')), //removes non numerical characters\n            SSD_Total: data[1],//.replace(/\\D/g,'')), //removes non numerical characters\n        },\n        tags:{\n            System: \"SSD\",\n        }\n    }];\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n    let usedMem = String(data[0].replace(/\\s+/g, ' ').trim());\n    let totMem = String(data[1].replace(/\\s+/g, ' ').trim());\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"SSD\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tSSD_Used: usedMem,\n\t\t\t\tSSD_Total: totMem,\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "func": "if(msg.topic != \"Used mem(SSD)\") {\n    return\n}\n\nlet siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet data = msg.payload.split('/')\n\n//return msg;\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            SSD_Used: data[0],//.replace(/\\D/g,'')), //removes non numerical characters\n            SSD_Total: data[1],//.replace(/\\D/g,'')), //removes non numerical characters\n        },\n        tags:{\n            System: \"SSD\",\n        }\n    }];\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n    let usedMem = String(data[0].replace(/\\s+/g, ' ').trim());\n    let totMem = String(data[1].replace(/\\s+/g, ' ').trim());\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"SSD\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tSSD_Used: \"\\\"\" + usedMem + \"\\\"\",\n\t\t\t\tSSD_Total: \"\\\"\" + totMem + \"\\\"\",\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 910,
         "y": 600,
         "wires": [
@@ -8553,6 +8558,22 @@
         "statusType": "auto",
         "x": 760,
         "y": 660,
+        "wires": []
+    },
+    {
+        "id": "b1de77a4.3be538",
+        "type": "debug",
+        "z": "d5b77494.f7aea8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 480,
         "wires": []
     }
 ]
