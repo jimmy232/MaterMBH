@@ -7628,7 +7628,7 @@
         "id": "5c6410cd.62b69",
         "type": "inject",
         "z": "35eb0e0e.decd62",
-        "name": "MONITOR | JC",
+        "name": "Site Name",
         "props": [
             {
                 "p": "payload"
@@ -7645,7 +7645,7 @@
         "topic": "",
         "payload": "MONITOR_JC",
         "payloadType": "str",
-        "x": 120,
+        "x": 100,
         "y": 60,
         "wires": [
             [
