@@ -1323,7 +1323,7 @@
         "type": "function",
         "z": "d5b77494.f7aea8",
         "name": "Scale",
-        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet deploys = global.get(\"deploys\") || 0;\n\n    msg.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            Uptime: msg.payload,\n            Deploys: parseFloat(deploys)\n        },\n        tags:{\n            System: \"UPTIME\"\n        }\n    }];\n    \nvar msg1 = {};\n\nstructureObject();\n\nreturn [[msg], [msg1]];\n        \nfunction structureObject() {\n    let uptime = String(msg.payload[0].fields.Uptime);\n\tmsg1.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"UPTIME\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tUptime: uptime,\n\t\t\t\tDeploys: parseFloat(deploys)\n\t\t\t},\n\n\t\t\t//timestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet deploys = global.get(\"deploys\") || 0;\n\n    msg.payload = [\n    {\n        measurement: \"OS\",\n        fields: {\n            Uptime: msg.payload,\n            Deploys: parseFloat(deploys)\n        },\n        tags:{\n            System: \"UPTIME\"\n        }\n    }];\n    \nvar msg1 = {};\n\nstructureObject();\n\nreturn [[msg], [msg1]];\n        \nfunction structureObject() {\n    let uptime = String(msg.payload[0].fields.Uptime);\n\tmsg1.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"UPTIME\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tUptime: uptime,\n\t\t\t\tDeploys: parseFloat(deploys)\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -7773,14 +7773,17 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 600,
         "y": 220,
         "wires": [
             [
-                "1315371d.952569"
+                "1315371d.952569",
+                "99f6d638.f1f588"
             ],
             [
-                "f65f221d.38c9"
+                "f65f221d.38c9",
+                "99f6d638.f1f588"
             ]
         ]
     },
@@ -8044,6 +8047,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 600,
         "y": 380,
         "wires": [
@@ -8213,6 +8217,22 @@
         "info": "",
         "x": 430,
         "y": 740,
+        "wires": []
+    },
+    {
+        "id": "99f6d638.f1f588",
+        "type": "debug",
+        "z": "14503b0b.6db795",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 160,
         "wires": []
     }
 ]
