@@ -91,13 +91,6 @@
         "info": ""
     },
     {
-        "id": "69ff444.c986bbc",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "cb1b82bc.a26ae",
         "type": "Stackhero-InfluxDB-v2-Server",
         "name": "",
@@ -1148,7 +1141,9 @@
         "x": 120,
         "y": 380,
         "wires": [
-            []
+            [
+                "108a7f62.8117b1"
+            ]
         ]
     },
     {
@@ -1861,6 +1856,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 520,
         "y": 260,
         "wires": [
