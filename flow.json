@@ -6744,7 +6744,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "MONITOR_JC",
+        "payload": "Master",
         "payloadType": "str",
         "x": 100,
         "y": 60,
