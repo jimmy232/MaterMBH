@@ -84,6 +84,13 @@
         "info": ""
     },
     {
+        "id": "12d1d253.3b0a0e",
+        "type": "tab",
+        "label": "Flashing Lamp",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "cb1b82bc.a26ae",
         "type": "Stackhero-InfluxDB-v2-Server",
         "name": "",
@@ -1109,9 +1116,7 @@
         "x": 560,
         "y": 420,
         "wires": [
-            [
-                "b8a63d98.ba90f"
-            ]
+            []
         ]
     },
     {
@@ -1208,22 +1213,6 @@
         "bucket": "",
         "x": 1000,
         "y": 300,
-        "wires": []
-    },
-    {
-        "id": "b8a63d98.ba90f",
-        "type": "influxdb batch",
-        "z": "e7563fe0.8c458",
-        "influxdb": "1b9bb20b.d5467e",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "",
-        "database": "monicon_sess",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1020,
-        "y": 420,
         "wires": []
     },
     {
@@ -1335,9 +1324,7 @@
         "x": 560,
         "y": 540,
         "wires": [
-            [
-                "784a7a6e.a2fb64"
-            ]
+            []
         ]
     },
     {
@@ -1351,22 +1338,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "784a7a6e.a2fb64",
-        "type": "influxdb batch",
-        "z": "e7563fe0.8c458",
-        "influxdb": "1b9bb20b.d5467e",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "",
-        "database": "",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1020,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "b87c327.ce7fdd",
@@ -1726,6 +1697,8 @@
         "qos": "2",
         "datatype": "auto",
         "broker": "5fca9504.17508c",
+        "nl": false,
+        "rap": false,
         "x": 170,
         "y": 340,
         "wires": [
@@ -1750,6 +1723,7 @@
         "z": "ce1b30ab.c2319",
         "name": "L-ALM-PT100",
         "links": [
+            "c260f821.25d778",
             "e06f8049.2b238"
         ],
         "x": 475,
@@ -1762,7 +1736,8 @@
         "z": "ce1b30ab.c2319",
         "name": "L-ALM-4n20",
         "links": [
-            "727aeff7.558a4"
+            "727aeff7.558a4",
+            "c260f821.25d778"
         ],
         "x": 475,
         "y": 420,
@@ -1932,9 +1907,7 @@
         "x": 560,
         "y": 660,
         "wires": [
-            [
-                "9a838bb6.1ab1f8"
-            ]
+            []
         ]
     },
     {
@@ -1948,22 +1921,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "9a838bb6.1ab1f8",
-        "type": "influxdb batch",
-        "z": "e7563fe0.8c458",
-        "influxdb": "1b9bb20b.d5467e",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "",
-        "database": "",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1020,
-        "y": 660,
-        "wires": []
     },
     {
         "id": "d7b81383.f9142",
@@ -2150,8 +2107,7 @@
         "y": 320,
         "wires": [
             [
-                "42507731.24b4b8",
-                "241e3e05.d1ef02"
+                "42507731.24b4b8"
             ]
         ]
     },
@@ -3410,6 +3366,11 @@
         "topic": "",
         "qos": "",
         "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
         "broker": "5fca9504.17508c",
         "x": 330,
         "y": 2280,
@@ -3453,7 +3414,9 @@
             "c37bbc7e.51264",
             "e25579c6.4f04d8",
             "b400755a.4bbc38",
-            "699294a4.9b178c"
+            "699294a4.9b178c",
+            "d3739f64.e7d71",
+            "1799b4e0.7bb7bb"
         ],
         "x": 195,
         "y": 2300,
@@ -3561,22 +3524,6 @@
         "wires": []
     },
     {
-        "id": "f74b43dd.94c43",
-        "type": "influxdb batch",
-        "z": "e7563fe0.8c458",
-        "influxdb": "1b9bb20b.d5467e",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "",
-        "database": "",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1020,
-        "y": 960,
-        "wires": []
-    },
-    {
         "id": "abb189e3.b4abc8",
         "type": "link in",
         "z": "e7563fe0.8c458",
@@ -3599,9 +3546,7 @@
         "x": 35,
         "y": 960,
         "wires": [
-            [
-                "f74b43dd.94c43"
-            ]
+            []
         ]
     },
     {
@@ -4783,9 +4728,7 @@
         "x": 560,
         "y": 780,
         "wires": [
-            [
-                "e03009de.38ffe8"
-            ]
+            []
         ]
     },
     {
@@ -4799,22 +4742,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "e03009de.38ffe8",
-        "type": "influxdb batch",
-        "z": "e7563fe0.8c458",
-        "influxdb": "1b9bb20b.d5467e",
-        "precision": "",
-        "retentionPolicy": "",
-        "name": "",
-        "database": "",
-        "retentionPolicyV18Flux": "",
-        "org": "",
-        "bucket": "",
-        "x": 1020,
-        "y": 780,
-        "wires": []
     },
     {
         "id": "a6fc753.e774888",
@@ -5347,22 +5274,8 @@
         "x": 660,
         "y": 620,
         "wires": [
-            [
-                "5e2df02a.f63e7"
-            ]
+            []
         ]
-    },
-    {
-        "id": "5e2df02a.f63e7",
-        "type": "link out",
-        "z": "ae5e2d49.68e0c",
-        "name": "",
-        "links": [
-            "abb189e3.b4abc8"
-        ],
-        "x": 795,
-        "y": 620,
-        "wires": []
     },
     {
         "id": "377877ea.af4428",
@@ -5437,22 +5350,8 @@
         "x": 1740,
         "y": 260,
         "wires": [
-            [
-                "3dadfec1.d1ed12"
-            ]
+            []
         ]
-    },
-    {
-        "id": "3dadfec1.d1ed12",
-        "type": "link out",
-        "z": "ae5e2d49.68e0c",
-        "name": "",
-        "links": [
-            "abb189e3.b4abc8"
-        ],
-        "x": 1875,
-        "y": 260,
-        "wires": []
     },
     {
         "id": "bf5396be.445188",
@@ -5528,22 +5427,8 @@
         "x": 660,
         "y": 260,
         "wires": [
-            [
-                "16251cb3.026963"
-            ]
+            []
         ]
-    },
-    {
-        "id": "16251cb3.026963",
-        "type": "link out",
-        "z": "ae5e2d49.68e0c",
-        "name": "",
-        "links": [
-            "abb189e3.b4abc8"
-        ],
-        "x": 795,
-        "y": 260,
-        "wires": []
     },
     {
         "id": "82e0df3a.50ae7",
@@ -7864,9 +7749,201 @@
         ]
     },
     {
-        "id": "241e3e05.d1ef02",
+        "id": "4955b640.c36f88",
         "type": "debug",
-        "z": "d365aa34.8aef88",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "33e280d1.99afa",
+        "type": "inject",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 380,
+        "wires": [
+            [
+                "635acf2c.01b44"
+            ]
+        ]
+    },
+    {
+        "id": "ba8ac180.c109c",
+        "type": "trigger",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "op1": "2,1",
+        "op2": "2,0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "2",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 580,
+        "y": 380,
+        "wires": [
+            [
+                "4955b640.c36f88",
+                "9c33ac2b.1b201"
+            ]
+        ]
+    },
+    {
+        "id": "9c33ac2b.1b201",
+        "type": "mqtt out",
+        "z": "12d1d253.3b0a0e",
+        "name": "Digital Output 02",
+        "topic": "MONICON-PLC/CMD/DigitalOutputs/1753240096",
+        "qos": "",
+        "retain": "",
+        "broker": "5fca9504.17508c",
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "70f65cad.2d4e94",
+        "type": "mqtt in",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "topic": "MONICON-PLC/Device/AI_PT100/1753240096",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "5fca9504.17508c",
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "78d00b0c.c35034"
+            ]
+        ]
+    },
+    {
+        "id": "8e3838c6.6d4438",
+        "type": "debug",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "78d00b0c.c35034",
+        "type": "function",
+        "z": "12d1d253.3b0a0e",
+        "name": "Temperature Sensor",
+        "func": "var data = msg.payload.split(\",\");\nmsg.payload = data[4];\nif(parseFloat(data[4]) > 20){\n    flow.set(\"alarm_0\", 1);\n}else{\n    flow.set(\"alarm_0\", 0);\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "8e3838c6.6d4438"
+            ]
+        ]
+    },
+    {
+        "id": "635acf2c.01b44",
+        "type": "function",
+        "z": "12d1d253.3b0a0e",
+        "name": "Check Alarm Status",
+        "func": "var Alarm = flow.get(\"alarm_0\") || null;\n\nif(Alarm === null) {\n    return;\n}\n\nif(Alarm === 1) {\n    return msg;\n}else{\n    return;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 410,
+        "y": 380,
+        "wires": [
+            [
+                "ba8ac180.c109c"
+            ]
+        ]
+    },
+    {
+        "id": "9d91790c.99d068",
+        "type": "comment",
+        "z": "12d1d253.3b0a0e",
+        "name": "Check PT100 Temperature Sensor",
+        "info": "",
+        "x": 280,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d986884e.c0fbc8",
+        "type": "comment",
+        "z": "12d1d253.3b0a0e",
+        "name": "Pulse Digital Output",
+        "info": "",
+        "x": 230,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "75196c62.a864c4",
+        "type": "mqtt in",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "topic": "sess/MONICON-PLC/Device/Alarm_PT100/#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4d64fa3d.ad0334",
+        "nl": false,
+        "rap": false,
+        "x": 310,
+        "y": 540,
+        "wires": [
+            [
+                "8d997e42.7ffef"
+            ]
+        ]
+    },
+    {
+        "id": "8d997e42.7ffef",
+        "type": "debug",
+        "z": "12d1d253.3b0a0e",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -7875,8 +7952,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 700,
-        "y": 260,
+        "x": 870,
+        "y": 540,
         "wires": []
     }
 ]
