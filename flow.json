@@ -3617,7 +3617,7 @@
         "topic": "",
         "payload": "MoniconPLC-Server004V0.1.8",
         "payloadType": "str",
-        "x": 170,
+        "x": 190,
         "y": 160,
         "wires": [
             [
