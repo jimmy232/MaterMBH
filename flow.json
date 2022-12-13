@@ -2851,6 +2851,7 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 640,
         "y": 560,
         "wires": [
@@ -3384,6 +3385,11 @@
         "topic": "",
         "qos": "",
         "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
         "broker": "4d64fa3d.ad0334",
         "x": 330,
         "y": 2340,
@@ -3395,26 +3401,24 @@
         "z": "d365aa34.8aef88",
         "name": "MQTT Local | Remote",
         "links": [
-            "e8bc6081.f6a39",
-            "e31f862a.4be1a8",
-            "bc5a69a0.b344c8",
-            "d43e38f9.001218",
-            "3920a476.1a7f4c",
-            "f9d89bd2.39cbe8",
-            "57996c9a.f65124",
-            "125523a6.48a3bc",
-            "80a4c574.8ca648",
-            "b597f3a7.7d688",
-            "2edd2e4d.c38122",
-            "26aec357.11ac9c",
             "11deca3a.f31256",
-            "ea90b06e.bf38a",
+            "125523a6.48a3bc",
+            "26aec357.11ac9c",
             "28f75e07.dca172",
-            "fa51f1a5.49096",
-            "c37bbc7e.51264",
-            "e25579c6.4f04d8",
+            "2edd2e4d.c38122",
+            "3920a476.1a7f4c",
+            "57996c9a.f65124",
+            "80a4c574.8ca648",
             "b400755a.4bbc38",
-            "699294a4.9b178c"
+            "b597f3a7.7d688",
+            "bc5a69a0.b344c8",
+            "c37bbc7e.51264",
+            "d43e38f9.001218",
+            "e31f862a.4be1a8",
+            "e8bc6081.f6a39",
+            "ea90b06e.bf38a",
+            "f9d89bd2.39cbe8",
+            "fa51f1a5.49096"
         ],
         "x": 195,
         "y": 2300,
@@ -7747,23 +7751,136 @@
         ]
     },
     {
-        "id": "4955b640.c36f88",
-        "type": "debug",
+        "id": "45fe140b.d11a0c",
+        "type": "mqtt in",
         "z": "12d1d253.3b0a0e",
         "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 870,
-        "y": 340,
+        "topic": "MONICON-PLC/Device/AI_4n20/3095417376",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "5fca9504.17508c",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "2d60ba83.f57726"
+            ]
+        ]
+    },
+    {
+        "id": "2d60ba83.f57726",
+        "type": "function",
+        "z": "12d1d253.3b0a0e",
+        "name": "AI00 Input Sensor",
+        "func": "var data = msg.payload.split(\",\");\nvar alarm_AI_Flag_0 = flow.get(\"alarm_AI_Flag_0\") || 0; \nvar alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\n\nif(alarm_AI_Flag_0 == 0){\n    if(parseFloat(data[7]) < 100){\n        flow.set(\"alarm_AI_0\", 1);\n        flow.set(\"alarm_AI_Flag_0\", 1);\n    }else{\n        flow.set(\"alarm_AI_0\", 0);\n        flow.set(\"alarm_AI_Flag_0\", 0);\n    return msg;\n    }\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d10d5973.567a18",
+        "type": "comment",
+        "z": "12d1d253.3b0a0e",
+        "name": "Mater Mackay - Outstation - AI00",
+        "info": "",
+        "x": 190,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "33e280d1.99afa",
+        "id": "e5526232.9aad2",
+        "type": "comment",
+        "z": "12d1d253.3b0a0e",
+        "name": "Mater Mackay - Flashing Lamp",
+        "info": "",
+        "x": 190,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "70c78489.c0842c",
+        "type": "mqtt in",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "topic": "MONICON-PLC/STAT/DigitalInputStatus/DI_00/404856757",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "5fca9504.17508c",
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "51d35d89.3c1064"
+            ]
+        ]
+    },
+    {
+        "id": "51d35d89.3c1064",
+        "type": "function",
+        "z": "12d1d253.3b0a0e",
+        "name": "Digital Input - Reset",
+        "func": "var data = msg.payload.split(\",\");\n\nif(parseInt(data[0]) == 1){\n    // Mute Digital Alarm\n    flow.set(\"alarm_DI_0\", 0);\n    // Mute Analog Alarm\n    flow.set(\"alarm_AI_0\", 0);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de1891fe.3a983",
+        "type": "comment",
+        "z": "12d1d253.3b0a0e",
+        "name": "Mater Mackay - Base Station - Reset PB",
+        "info": "",
+        "x": 220,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1add992b.114777",
+        "type": "mqtt in",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "topic": "MONICON-PLC/STAT/DigitalInputStatus/DI_00/3095417376",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "5fca9504.17508c",
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "7f0eff78.181c8"
+            ]
+        ]
+    },
+    {
+        "id": "7f0eff78.181c8",
+        "type": "function",
+        "z": "12d1d253.3b0a0e",
+        "name": "Digital Input - Float",
+        "func": "var data = msg.payload.split(\",\");\n\nif(parseInt(data[0]) == 1){\n    flow.set(\"alarm_DI_0\", 1); \n}else{\n    flow.set(\"alarm_DI_0\", 0);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 650,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19b266f9.a8b239",
         "type": "inject",
         "z": "12d1d253.3b0a0e",
         "name": "",
@@ -7783,21 +7900,21 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 230,
-        "y": 380,
+        "x": 150,
+        "y": 400,
         "wires": [
             [
-                "635acf2c.01b44"
+                "feb2d7bf.fe9f88"
             ]
         ]
     },
     {
-        "id": "ba8ac180.c109c",
+        "id": "4549f448.a5732c",
         "type": "trigger",
         "z": "12d1d253.3b0a0e",
         "name": "",
-        "op1": "2,1",
-        "op2": "2,0",
+        "op1": "0,1",
+        "op2": "0,0",
         "op1type": "str",
         "op2type": "str",
         "duration": "2",
@@ -7808,150 +7925,43 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 580,
-        "y": 380,
+        "x": 840,
+        "y": 400,
         "wires": [
             [
-                "4955b640.c36f88",
-                "9c33ac2b.1b201"
+                "64059a72.9847a4"
             ]
         ]
     },
     {
-        "id": "9c33ac2b.1b201",
+        "id": "64059a72.9847a4",
         "type": "mqtt out",
         "z": "12d1d253.3b0a0e",
-        "name": "Digital Output 02",
-        "topic": "MONICON-PLC/CMD/DigitalOutputs/1753240096",
+        "name": "Digital Output 00",
+        "topic": "MONICON-PLC/CMD/DigitalOutputs/404856757",
         "qos": "",
         "retain": "",
         "broker": "5fca9504.17508c",
-        "x": 890,
-        "y": 380,
+        "x": 1050,
+        "y": 400,
         "wires": []
     },
     {
-        "id": "70f65cad.2d4e94",
-        "type": "mqtt in",
-        "z": "12d1d253.3b0a0e",
-        "name": "",
-        "topic": "MONICON-PLC/Device/AI_PT100/1753240096",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "5fca9504.17508c",
-        "x": 320,
-        "y": 280,
-        "wires": [
-            [
-                "78d00b0c.c35034"
-            ]
-        ]
-    },
-    {
-        "id": "8e3838c6.6d4438",
-        "type": "debug",
-        "z": "12d1d253.3b0a0e",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 870,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "78d00b0c.c35034",
-        "type": "function",
-        "z": "12d1d253.3b0a0e",
-        "name": "Temperature Sensor",
-        "func": "var data = msg.payload.split(\",\");\nmsg.payload = data[4];\nif(parseFloat(data[4]) > 20){\n    flow.set(\"alarm_0\", 1);\n}else{\n    flow.set(\"alarm_0\", 0);\n    return msg;\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 620,
-        "y": 280,
-        "wires": [
-            [
-                "8e3838c6.6d4438"
-            ]
-        ]
-    },
-    {
-        "id": "635acf2c.01b44",
+        "id": "feb2d7bf.fe9f88",
         "type": "function",
         "z": "12d1d253.3b0a0e",
         "name": "Check Alarm Status",
-        "func": "var Alarm = flow.get(\"alarm_0\") || null;\n\nif(Alarm === null) {\n    return;\n}\n\nif(Alarm === 1) {\n    return msg;\n}else{\n    return;\n}",
+        "func": "var alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\nvar alarm_DI_0 = flow.get(\"alarm_DI_0\") || 0;\n\nif(alarm_AI_0 == 0 && alarm_DI_0 == 0) {\n    return;\n}else{\n   return msg; \n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 410,
-        "y": 380,
+        "x": 650,
+        "y": 400,
         "wires": [
             [
-                "ba8ac180.c109c"
+                "4549f448.a5732c"
             ]
         ]
-    },
-    {
-        "id": "9d91790c.99d068",
-        "type": "comment",
-        "z": "12d1d253.3b0a0e",
-        "name": "Check PT100 Temperature Sensor",
-        "info": "",
-        "x": 280,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "d986884e.c0fbc8",
-        "type": "comment",
-        "z": "12d1d253.3b0a0e",
-        "name": "Pulse Digital Output",
-        "info": "",
-        "x": 230,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "75196c62.a864c4",
-        "type": "mqtt in",
-        "z": "12d1d253.3b0a0e",
-        "name": "",
-        "topic": "sess/MONICON-PLC/Device/Alarm_PT100/#",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "4d64fa3d.ad0334",
-        "nl": false,
-        "rap": false,
-        "x": 310,
-        "y": 540,
-        "wires": [
-            [
-                "8d997e42.7ffef"
-            ]
-        ]
-    },
-    {
-        "id": "8d997e42.7ffef",
-        "type": "debug",
-        "z": "12d1d253.3b0a0e",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 870,
-        "y": 540,
-        "wires": []
     }
 ]
