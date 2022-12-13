@@ -7772,15 +7772,18 @@
         "type": "function",
         "z": "12d1d253.3b0a0e",
         "name": "AI00 Input Sensor",
-        "func": "var data = msg.payload.split(\",\");\nvar alarm_AI_Flag_0 = flow.get(\"alarm_AI_Flag_0\") || 0; \nvar alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\n\nif(alarm_AI_Flag_0 == 0){\n    if(parseFloat(data[7]) < 100){\n        flow.set(\"alarm_AI_0\", 1);\n        flow.set(\"alarm_AI_Flag_0\", 1);\n    }else{\n        flow.set(\"alarm_AI_0\", 0);\n        flow.set(\"alarm_AI_Flag_0\", 0);\n    return msg;\n    }\n}\n\n\n",
+        "func": "var data = msg.payload.split(\",\");\nvar alarmSetpoint = 700;\nvar alarm_AI_Flag_0 = flow.get(\"alarm_AI_Flag_0\") || 0; \nvar alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\n\nif(alarm_AI_Flag_0 == 0){\n    if(parseFloat(data[7]) < alarmSetpoint){\n        flow.set(\"alarm_AI_0\", 1);\n        flow.set(\"alarm_AI_Flag_0\", 1);\n    }else{\n        flow.set(\"alarm_AI_0\", 0);\n        flow.set(\"alarm_AI_Flag_0\", 0);\n    return msg;\n    }\n}\nif(alarm_AI_Flag_0 == 1 && parseFloat(data[7]) > alarmSetpoint){\n    flow.set(\"alarm_AI_0\", 0);\n    flow.set(\"alarm_AI_Flag_0\", 0);\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 650,
         "y": 140,
         "wires": [
-            []
+            [
+                "639cda3b.0ef4e4"
+            ]
         ]
     },
     {
@@ -7830,10 +7833,13 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 650,
         "y": 340,
         "wires": [
-            []
+            [
+                "639cda3b.0ef4e4"
+            ]
         ]
     },
     {
@@ -7876,7 +7882,9 @@
         "x": 650,
         "y": 200,
         "wires": [
-            []
+            [
+                "639cda3b.0ef4e4"
+            ]
         ]
     },
     {
@@ -7951,17 +7959,35 @@
         "type": "function",
         "z": "12d1d253.3b0a0e",
         "name": "Check Alarm Status",
-        "func": "var alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\nvar alarm_DI_0 = flow.get(\"alarm_DI_0\") || 0;\n\nif(alarm_AI_0 == 0 && alarm_DI_0 == 0) {\n    return;\n}else{\n   return msg; \n}\n",
+        "func": "var alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\nvar alarm_DI_0 = flow.get(\"alarm_DI_0\") || 0;\n\nif(alarm_AI_0 == 0 && alarm_DI_0 == 0) {\n    msg.payload = \"0,0\";\n    return msg;\n}else{\n    msg.payload = \"0,1\";\n   return msg; \n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 650,
         "y": 400,
         "wires": [
             [
-                "4549f448.a5732c"
+                "4549f448.a5732c",
+                "639cda3b.0ef4e4"
             ]
         ]
+    },
+    {
+        "id": "639cda3b.0ef4e4",
+        "type": "debug",
+        "z": "12d1d253.3b0a0e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 160,
+        "wires": []
     }
 ]
