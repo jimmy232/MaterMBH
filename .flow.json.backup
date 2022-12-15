@@ -7772,7 +7772,7 @@
         "type": "function",
         "z": "12d1d253.3b0a0e",
         "name": "AI00 Input Sensor",
-        "func": "var data = msg.payload.split(\",\");\nvar alarmSetpoint = 700;\nvar alarm_AI_Flag_0 = flow.get(\"alarm_AI_Flag_0\") || 0; \nvar alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\n\nif(alarm_AI_Flag_0 == 0){\n    if(parseFloat(data[7]) < alarmSetpoint){\n        flow.set(\"alarm_AI_0\", 1);\n        flow.set(\"alarm_AI_Flag_0\", 1);\n    }else{\n        flow.set(\"alarm_AI_0\", 0);\n        flow.set(\"alarm_AI_Flag_0\", 0);\n    return msg;\n    }\n}\nif(alarm_AI_Flag_0 == 1 && parseFloat(data[7]) > alarmSetpoint){\n    flow.set(\"alarm_AI_0\", 0);\n    flow.set(\"alarm_AI_Flag_0\", 0);\n}\n\n\n",
+        "func": "var data = msg.payload.split(\",\");\nvar alarmSetpoint = 100;\nvar alarm_AI_Flag_0 = flow.get(\"alarm_AI_Flag_0\") || 0; \nvar alarm_AI_0 = flow.get(\"alarm_AI_0\") || 0;\n\nif(alarm_AI_Flag_0 == 0){\n    if(parseFloat(data[7]) < alarmSetpoint){\n        flow.set(\"alarm_AI_0\", 1);\n        flow.set(\"alarm_AI_Flag_0\", 1);\n    }else{\n        flow.set(\"alarm_AI_0\", 0);\n        flow.set(\"alarm_AI_Flag_0\", 0);\n    return msg;\n    }\n}\nif(alarm_AI_Flag_0 == 1 && parseFloat(data[7]) > alarmSetpoint){\n    flow.set(\"alarm_AI_0\", 0);\n    flow.set(\"alarm_AI_Flag_0\", 0);\n}\n\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
