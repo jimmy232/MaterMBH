@@ -3422,7 +3422,7 @@
         "id": "dbf0f3d7bcc12218",
         "type": "inject",
         "z": "dd961a666a1b7968",
-        "name": "MoniconPLC-Server003V0.0.31",
+        "name": "MoniconPLC-Server004V0.2.1",
         "props": [
             {
                 "p": "payload"
@@ -3437,7 +3437,7 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "MoniconPLC-Server003V0.0.31",
+        "payload": "MoniconPLC-Server004V0.2.1",
         "payloadType": "str",
         "x": 170,
         "y": 80,
