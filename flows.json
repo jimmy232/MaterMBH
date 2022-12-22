@@ -127,19 +127,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "7e73cdd4.e0b814",
-        "type": "tls-config",
-        "name": "local-tls",
-        "cert": "",
-        "key": "",
-        "ca": "",
-        "certname": "",
-        "keyname": "",
-        "caname": "",
-        "servername": "https://us-central1-1.gcp.cloud2.influxdata.com",
-        "verifyservercert": true
-    },
-    {
         "id": "5fca9504.17508c",
         "type": "mqtt-broker",
         "name": "",
