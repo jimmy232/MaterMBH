@@ -84,9 +84,9 @@
         "info": ""
     },
     {
-        "id": "f8fd9e9e26964590",
+        "id": "8b6df10d77edfd01",
         "type": "tab",
-        "label": "Modbus",
+        "label": "OMRON",
         "disabled": false,
         "info": ""
     },
@@ -314,6 +314,18 @@
         "caname": "",
         "servername": "https://us-central1-1.gcp.cloud2.influxdata.com",
         "verifyservercert": true
+    },
+    {
+        "id": "b5ca804a171a5d4a",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://192.168.1.35:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": false,
+        "login": true,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
     },
     {
         "id": "54ad63646cf3b88d",
@@ -6925,199 +6937,809 @@
         ]
     },
     {
-        "id": "9fb520e3726aa519",
-        "type": "modbus-server",
-        "z": "f8fd9e9e26964590",
-        "name": "",
-        "logEnabled": false,
-        "hostname": "192.168.1.222",
-        "serverPort": "502",
-        "responseDelay": 100,
-        "delayUnit": "ms",
-        "coilsBufferSize": 10000,
-        "holdingBufferSize": 10000,
-        "inputBufferSize": 10000,
-        "discreteBufferSize": 10000,
-        "showErrors": false,
-        "x": 220,
+        "id": "e16199613d31c5a6",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Fault_On_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Fault_On_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "b7e180f980728a10",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Input_Pressure_Jacket_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Input_Pressure_Jacket_rl;datatype=INT",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 860,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "ec1ff7543ca1936e",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Input_GEN_Level_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Input_GEN_Level_rl;datatype=REAL",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 920,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "3279d4a36fef9fa7",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Cyc_Abort_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Cyc_Abort_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
         "y": 120,
         "wires": [
-            [],
-            [],
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "3133c15b72ac40a8",
-        "type": "modbus-read",
-        "z": "f8fd9e9e26964590",
-        "name": "SESS Modbus FC 3",
-        "topic": "",
-        "showStatusActivities": false,
-        "logIOActivities": false,
-        "showErrors": false,
-        "unitid": "",
-        "dataType": "HoldingRegister",
-        "adr": "0",
-        "quantity": "5",
-        "rate": "10",
-        "rateUnit": "s",
-        "delayOnStart": true,
-        "startDelayTime": "10",
-        "server": "d508e07e.f4bc",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "x": 250,
-        "y": 380,
-        "wires": [
             [
-                "eb459b5fb602fcbc"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "201ec2d898a91b19",
-        "type": "modbus-read",
-        "z": "f8fd9e9e26964590",
-        "name": "SESS Modbus FC 1",
-        "topic": "",
-        "showStatusActivities": false,
-        "logIOActivities": false,
-        "showErrors": false,
-        "showWarnings": true,
-        "unitid": "",
-        "dataType": "Coil",
-        "adr": "0",
-        "quantity": "15",
-        "rate": "10",
-        "rateUnit": "s",
-        "delayOnStart": true,
-        "startDelayTime": "10",
-        "server": "d508e07e.f4bc",
-        "useIOFile": false,
-        "ioFile": "",
-        "useIOForPayload": false,
-        "emptyMsgOnFail": false,
-        "x": 250,
-        "y": 220,
-        "wires": [
-            [
-                "73fae8dc52667eec"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "0691ff48aae80683",
-        "type": "function",
-        "z": "f8fd9e9e26964590",
-        "name": "FC 1 - Coil Registers",
-        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nvar data = msg.payload.replace(/\\[/g, \"\").split(',')\n\n//Influx-DB - Local\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"MB_Coils\",\n        fields: {\n            cycleAbort: data[0] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleOn: data[1] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowSteamSupply: data[2] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowAirSupply: data[3] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            gasketLowPressure: data[4] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowWaterSupply: data[5] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            lowSteriTemp: data[6] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleOverTemp: data[7] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            powerInterrupt: data[8] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            generatorFault: data[9] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n            doorFault: data[10] == \"true\" ? 1 : 0//.replace(/\\D/g,'')), //removes non numerical characters\n\n        },\n        tags:{\n            System: \"Modbus\",\n        }\n    }];\n    \n//Influx-V2 - Cloud\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"MB_Coils\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tcycleAbort: data[0] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleOn: data[1] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowSteamSupply: data[2] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowAirSupply: data[3] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                gasketLowPressure: data[4] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowWaterSupply: data[5] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                lowSteriTemp: data[6] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleOverTemp: data[7] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                powerInterrupt: data[8] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                generatorFault: data[9] == \"true\" ? 1 : 0,//.replace(/\\D/g,'')), //removes non numerical characters\n                doorFault: data[10] == \"true\" ? 1 : 0//.replace(/\\D/g,'')), //removes non numerical characters\n\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
-        "outputs": 2,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 600,
-        "y": 220,
-        "wires": [
-            [
-                "bc68bc8a28df9617"
-            ],
-            [
-                "e61f97b8f9e3ef74"
+                "d316f604b6378e03"
             ]
         ]
     },
     {
-        "id": "5f35af664abfc429",
-        "type": "function",
-        "z": "f8fd9e9e26964590",
-        "name": "FC 3 - Holding Registers",
-        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nvar data = msg.payload.replace(/\\[/g, \"\").split(',')\n\n//Influx-DB - Local\n\nvar msg1 = {};\n\n    msg1.payload = [\n    {\n        measurement: \"MB_HoldingReg\",\n        fields: {\n            cycleWorkingTemp: parseFloat(data[0]),//.replace(/\\D/g,'')), //removes non numerical characters\n            cycleWorkingPressure: parseFloat(data[1]),//.replace(/\\D/g,'')), //removes non numerical characters\n            chilledWaterFlow: parseFloat(data[2]),//.replace(/\\D/g,'')), //removes non numerical characters\n            chilledWaterTemp: parseFloat(data[3])//.replace(/\\D/g,'')), //removes non numerical characters\n\n        },\n        tags:{\n            System: \"Modbus\",\n        }\n    }];\n    \n//Influx-V2 - Cloud\n    \nvar msg2 = {};\n\nstructureObject();\n\nreturn [[msg1], [msg2]];\n        \nfunction structureObject() {\n\tmsg2.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\tSystem: \"MB_HoldingReg\"\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\tcycleWorkingTemp: parseFloat(data[0]),//.replace(/\\D/g,'')), //removes non numerical characters\n                cycleWorkingPressure: parseFloat(data[1]),//.replace(/\\D/g,'')), //removes non numerical characters\n                chilledWaterFlow: parseFloat(data[2]),//.replace(/\\D/g,'')), //removes non numerical characters\n                chilledWaterTemp: parseFloat(data[3])//.replace(/\\D/g,'')), //removes non numerical characters\n\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
-        "outputs": 2,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 610,
-        "y": 380,
-        "wires": [
-            [
-                "bc68bc8a28df9617"
-            ],
-            [
-                "e61f97b8f9e3ef74"
-            ]
-        ]
-    },
-    {
-        "id": "73fae8dc52667eec",
-        "type": "json",
-        "z": "f8fd9e9e26964590",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 430,
-        "y": 220,
-        "wires": [
-            [
-                "0691ff48aae80683"
-            ]
-        ]
-    },
-    {
-        "id": "eb459b5fb602fcbc",
-        "type": "json",
-        "z": "f8fd9e9e26964590",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 430,
-        "y": 380,
-        "wires": [
-            [
-                "5f35af664abfc429"
-            ]
-        ]
-    },
-    {
-        "id": "e61f97b8f9e3ef74",
-        "type": "link out",
-        "z": "f8fd9e9e26964590",
-        "name": "",
-        "links": [
-            "f45ee5a9d828f33f"
+        "id": "7f3ac1246e1ff211",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Cyc_ON_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
         ],
-        "x": 1015,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "bc68bc8a28df9617",
-        "type": "link out",
-        "z": "f8fd9e9e26964590",
-        "name": "",
-        "links": [
-            "9621ef347f99598b"
-        ],
-        "x": 1015,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "59532f254f49e4d5",
-        "type": "comment",
-        "z": "f8fd9e9e26964590",
-        "name": "Local MODBUS Server - eth0 - 192.168.1.222",
-        "info": "",
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Cyc_ON_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
         "x": 310,
-        "y": 40,
-        "wires": []
+        "y": 160,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "7ca8aebe53769208",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Low_Steam_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Low_Steam_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "f50949432611c11e",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Low_Air_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Low_Air_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "c8d1e722c6f57fcd",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Low_Water_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Low_Water_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "4f4e1c083e43515c",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Low_Gask_Press_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Low_Gask_Press_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "d316f604b6378e03"
+            ]
+        ]
+    },
+    {
+        "id": "eb74277cdfc0815b",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Low_Steri_Temp_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Low_Steri_Temp_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 460,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "e878b57e0519560a",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Over_Temp_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Over_Temp_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 500,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "c1bda2a945d7cab2",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Power_Interrupt_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Power_Interrupt_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "422bc2edc9909c09",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Generator_Fault_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Generator_Fault_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 580,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "bc252c069d5b35cb",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Door_Fault_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Door_Fault_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 620,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "35d10400fed6b26c",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_SteamCharge_TO_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_SteamCharge_TO_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 660,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "05db9f2328ffb565",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Pulsing_TO_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Pulsing_TO_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 700,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "9c32819927d9240b",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "BMS_Excessive_Leak_DO_bool",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=BMS_Excessive_Leak_DO_bool;datatype=Boolean",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 740,
+        "wires": [
+            [
+                "28d42b9635fd3285"
+            ]
+        ]
+    },
+    {
+        "id": "fc1f499686d32517",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Temp_Water_Flow_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Temp_Water_Flow_rl;datatype=REAL",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 980,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "86024d65ea68749a",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Input_Water_Flow_Temp_raw_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Input_Water_Flow_Temp_raw_rl;datatype=REAL",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 1040,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "a5a99d8eaad12498",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Temp_Vac_Pump_Work_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Temp_Vac_Pump_Work_rl;datatype=REAL",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 1100,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "4dab296186a8abb3",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Press_Generator_Work_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Press_Generator_Work_rl;datatype=Int16",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 1160,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "ddc9b5e3899b48d0",
+        "type": "inject",
+        "z": "8b6df10d77edfd01",
+        "name": "Temp_Drain_Work_rl",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ns=4;s=Temp_Drain_Work_rl;datatype=REAL",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 1220,
+        "wires": [
+            [
+                "bb8f1cca31786607"
+            ]
+        ]
+    },
+    {
+        "id": "21e5d30a397a808f",
+        "type": "function",
+        "z": "8b6df10d77edfd01",
+        "name": "Remote Database",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet topic = msg.topic\n\nstructureObject();\n\nreturn msg;\n        \nfunction structureObject() {\n\tmsg.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\t//Analogs: msg.topic,\n\t\t\t\tdatabaseID: String(\"MoniconPLC-1\")\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\t[topic]: msg.payload\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "f4466b441851b590"
+            ]
+        ]
+    },
+    {
+        "id": "28d42b9635fd3285",
+        "type": "OpcUa-Client",
+        "z": "8b6df10d77edfd01",
+        "endpoint": "b5ca804a171a5d4a",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 580,
+        "y": 600,
+        "wires": [
+            [
+                "aa7ed6ae423ea6f4"
+            ]
+        ]
+    },
+    {
+        "id": "bb8f1cca31786607",
+        "type": "OpcUa-Client",
+        "z": "8b6df10d77edfd01",
+        "endpoint": "b5ca804a171a5d4a",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 580,
+        "y": 1040,
+        "wires": [
+            [
+                "c8a5f85a31c0075d"
+            ]
+        ]
+    },
+    {
+        "id": "d316f604b6378e03",
+        "type": "OpcUa-Client",
+        "z": "8b6df10d77edfd01",
+        "endpoint": "b5ca804a171a5d4a",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": 10,
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "folderName4PKI": "",
+        "name": "",
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "21e5d30a397a808f"
+            ]
+        ]
+    },
+    {
+        "id": "bdefb7415534e0c9",
+        "type": "Stackhero-InfluxDB-v2-write",
+        "z": "8b6df10d77edfd01",
+        "server": "da535876.280af8",
+        "name": "SESS_ID001",
+        "x": 1090,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c459778995d48d1",
+        "type": "Stackhero-InfluxDB-v2-write",
+        "z": "8b6df10d77edfd01",
+        "server": "da535876.280af8",
+        "name": "SESS_ID001",
+        "x": 1090,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4466b441851b590",
+        "type": "Stackhero-InfluxDB-v2-write",
+        "z": "8b6df10d77edfd01",
+        "server": "da535876.280af8",
+        "name": "SESS_ID001",
+        "x": 1090,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa7ed6ae423ea6f4",
+        "type": "function",
+        "z": "8b6df10d77edfd01",
+        "name": "Remote Database",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet topic = msg.topic\n\nstructureObject();\n\nreturn msg;\n        \nfunction structureObject() {\n\tmsg.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\t//Analogs: msg.topic,\n\t\t\t\tdatabaseID: String(\"MoniconPLC-1\")\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\t[topic]: msg.payload\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 600,
+        "wires": [
+            [
+                "2c459778995d48d1"
+            ]
+        ]
+    },
+    {
+        "id": "c8a5f85a31c0075d",
+        "type": "function",
+        "z": "8b6df10d77edfd01",
+        "name": "Remote Database",
+        "func": "let siteID = global.get(\"siteID\") || \"Site_IDxxx\"\nlet topic = msg.topic\n\nstructureObject();\n\nreturn msg;\n        \nfunction structureObject() {\n\tmsg.payload = {\n\t\t// You bucket\n\t\t// Optional (it can be defined in the node credentials settings)\n\t\tbucket: 'SESS BS ID001',\n\n\t\t// Precision of timestamp\n\t\t// Optional\n\t\t// Can be `ns` (nanoseconds),\n\t\t//        `us` (microseconds),\n\t\t//        `ms` (milliseconds),\n\t\t//        `s` (seconds).\n\t\t// The default is `ns`\n\t\tprecision: 'ms',\n\n\t\t// Data to send to InfluxDB\n\t\t// Can be an array of objects or only one object\n\t\tdata: [\n\t\t{\n\t\t\tmeasurement: siteID,\n\n\t\t\ttags:{\n\t\t\t\t//Analogs: msg.topic,\n\t\t\t\tdatabaseID: String(\"MoniconPLC-1\")\n\t\t\t},\n\n\t\t\tfields: {\n\t\t\t\t[topic]: msg.payload\n\t\t\t},\n\n\t\t\ttimestamp: Date.now()\n\t\t},\n\t\t]\n\t};\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 1040,
+        "wires": [
+            [
+                "bdefb7415534e0c9"
+            ]
+        ]
     }
 ]
